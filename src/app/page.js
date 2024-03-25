@@ -1,23 +1,22 @@
 "use client"
-import { useState } from "react";
+import Link from "next/link";
 
 export default function Home() {
-  
-  const [hello,setHello] = useState("Bye")
-  
-  const handler = (str) => {
-    setHello(str)
-  }
 
   return (
     <main>
       <div>{hello}</div>
-      <button onClick = {()=>{handler("Bye")}}>
-        Leiter Anschauen
+      <button>
+        <Link href ="/ladder">
+            Leiter
+        </Link>
       </button>
-      <button onClick = {()=>{handler("Hello")}}>
-        Spiel Eintragen
+      <button >
+        <Link  href="/game">
+            Game
+        </Link>
       </button>
     </main>
   );
 }
+
