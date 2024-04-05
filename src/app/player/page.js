@@ -7,19 +7,31 @@ import { useState } from "react"
 export default function Hello(){
 
     const [name,setName] = useState("")
-    const [nameError,setNameError] = useState("")
+    const [nameError,setNameError] = useState("Enter Name")
 
-    const handleSubmit = () =>{
-        if(nameError !== "Valid Name"){return}
+    const checkNameError = (string) => {
+        if(string === ""){setNameError("Enter Name");return}
+        if(string.length >= 10){setNameError("Name too Long, 10 Characters Max");return}
+        setNameError("Valid Name")
+    }
+
+    const submitName = () => {
         console.log("Submit",name)
     }
 
-    const handleChange = (e) => {
-        setName(e.target.value)
-        if(e.target.value === ""){setNameError("Enter Name");return}
-        if(e.target.value.length >= 10){setNameError("Name too Long, 10 Characters Max");return}
-        setNameError("Valid Name")
+
+    const handleSubmit = () =>{
+        if(nameError !== "Valid Name"){return}
+        submitName()
     }
+
+    const handleChange = (e) => {
+        const str = e.target.value
+        setName(str)
+        checkNameError(str)
+    }
+
+
 
     return (
         <div>
