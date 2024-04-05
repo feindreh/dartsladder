@@ -7,12 +7,17 @@ export default function Home() {
     <main>
       <button>
         <Link href ="/ladder">
-            Leiter
+            Leiter anschauen
         </Link>
       </button>
       <button >
         <Link  href="/game">
-            Game
+            Spiel eintragen
+        </Link>
+      </button>
+      <button >
+        <Link  href="/player">
+            Neuer Spieler
         </Link>
       </button>
     </main>
