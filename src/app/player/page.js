@@ -5,6 +5,7 @@ import { useState } from "react"
 import HomeButton from "../elements/home"
 
 import addName from "../firebase/addData"
+import { hasName } from "../firebase/addData"
 
 export default function Hello(){
 
@@ -17,11 +18,10 @@ export default function Hello(){
         setNameError("Valid Name")
     }
 
-    
-
-
-    const handleSubmit = () =>{
+    const handleSubmit = async () =>{
         if(nameError !== "Valid Name"){return}
+        const used = await hasName(name)
+        if(used){setNameError("Name used");return}
         addName(name)
     }
 
