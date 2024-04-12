@@ -13,6 +13,7 @@ export default function Hello(){
     const [nameError,setNameError] = useState("Enter Name")
 
     const checkNameError = (string) => {
+        if(string === "Name used"){setNameError(string)}
         if(string === ""){setNameError("Enter Name");return}
         if(string.length >= 10){setNameError("Name too Long, 10 Characters Max");return}
         setNameError("Valid Name")
@@ -21,7 +22,7 @@ export default function Hello(){
     const handleSubmit = async () =>{
         if(nameError !== "Valid Name"){return}
         const used = await hasName(name)
-        if(used){setNameError("Name used");return}
+        if(used){checkNameError("Name used");return}
         addName(name)
     }
 
