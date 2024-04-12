@@ -1,8 +1,10 @@
 "use client"
 
-import HomeButton from "../elements/home"
 import { useState } from "react"
 
+import HomeButton from "../elements/home"
+
+import addName from "../firebase/addData"
 
 export default function Hello(){
 
@@ -15,14 +17,12 @@ export default function Hello(){
         setNameError("Valid Name")
     }
 
-    const submitName = () => {
-        console.log("Submit",name)
-    }
+    
 
 
     const handleSubmit = () =>{
         if(nameError !== "Valid Name"){return}
-        submitName()
+        addName(name)
     }
 
     const handleChange = (e) => {
