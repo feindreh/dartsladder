@@ -1,6 +1,8 @@
 "use client"
 
 import HomeButton from "../elements/home"
+import Ladder from "./Ladder"
+
 import { getLadder } from "../firebase/addData"
 
 import { useEffect,useState } from "react"
@@ -23,7 +25,7 @@ export default function Hello(){
     return (
         <div>
             <HomeButton/>
-            <div>Ladder</div>
+            <Ladder players = {players}/>
         </div>  
     )
 }
