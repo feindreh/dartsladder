@@ -1,11 +1,17 @@
 "use client"
 
+import { useState } from "react"
+
 import HomeButton from "../elements/home"
+import Player from "./player"
 
 export default function Hello(){
 
-    const handleClick = () => {
-        console.log("HI")
+
+    const [players,setPlayers] = useState([])
+
+    const newPlayer = () => {
+        console.log("newPlayer")
     }
 
 
@@ -13,15 +19,12 @@ export default function Hello(){
         <div>
             <HomeButton/>
             <div>game</div>
-            <div style={{display:"flex",flexDirection:"column",gap:"10px",alignItems:"center"}}>
-                <div>Player1</div>
-                <input type="text" />
-                <div>Player2</div>
-                <input type="text" />
-                <div>Result</div>
-                <input type="text" />
-                <button type="button" onClick = {()=>{handleClick()}}>Submit</button>
+            <div>
+                {players.map((a,i) => <  Player key = {i}/>)}
+                <button type="button" onClick = {()=>newPlayer()}>New Player</button>
             </div>
+            
+            
         </div>  
     )
 }
