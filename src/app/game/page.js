@@ -11,7 +11,11 @@ export default function Hello(){
     const [players,setPlayers] = useState([])
 
     const newPlayer = () => {
-        console.log("newPlayer")
+        setPlayers([...players,""])
+    }
+
+    const deletePlayer = (index) => {
+        setPlayers(players.filter((a,i) => i !== index))
     }
 
 
@@ -20,7 +24,7 @@ export default function Hello(){
             <HomeButton/>
             <div>game</div>
             <div>
-                {players.map((a,i) => <  Player key = {i}/>)}
+                {players.map((a,i) => <  Player key = {i} delete = {deletePlayer} index = {i}/>)}
                 <button type="button" onClick = {()=>newPlayer()}>New Player</button>
             </div>
             

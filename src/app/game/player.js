@@ -1,9 +1,9 @@
-export default function Player(){
-
+export default function Player(props){
+    
     return(
         <div>
             <div>Player</div>
-            <button type="button">Delete</button>
+            <button type="button" onClick = {()=>{props.delete(props.index)}}>Delete</button>
         </div>
     )
 
