@@ -33,9 +33,13 @@ export default function Hello(){
                 </div>
 
                 <div>
-                    <label>Winner</label>
-                    <input type="radio" name="group1" value="player1" onChange = {(e)=>{setWin(e.target.value)}}></input>
-                    <input type="radio" name="group1" value="player2" onChange = {(e)=>{setWin(e.target.value)}}></input>
+                    <fieldset style = {{maxWidth:"200px",display:"flex",gap:"5px",justifyContent:"center"}}>
+                        <legend>Winner</legend>
+                        <label>Player1</label>
+                        <input type="radio" name="group1" value="player1" onChange = {(e)=>{setWin(e.target.value)}}></input>
+                        <label>Player2</label>
+                        <input type="radio" name="group1" value="player2" onChange = {(e)=>{setWin(e.target.value)}}></input>
+                    </fieldset>
                 </div>
                 
                 <button type="submit">Sumbit</button>
