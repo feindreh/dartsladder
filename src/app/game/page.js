@@ -4,7 +4,7 @@
 import HomeButton from "../elements/home"
 import { useState } from "react";
 
-import { hasName } from "../firebase/addData";
+import { hasName,updateElo } from "../firebase/addData";
 
 export default function Hello(){
     
@@ -20,14 +20,20 @@ export default function Hello(){
         return true
     }   
 
+    const handleGame = async (name1,name2) => {
+
+    }
+
     const handleButton = async (e) => {
         e.preventDefault();
         if((await checkName(player1,player2)) === false){return}
         if(win === undefined){console.log("win wrong");return}
-        console.log(player1,player2,win)
+        if(win === "player1"){
+            handleGame(player1,player2)
+        }else{
+            handleGame(player2,player1)
+        }
     }
-
-
 
     return (
         <div>
