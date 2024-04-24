@@ -18,6 +18,13 @@ const addName = async (name) => {
     });
 }
 
+export const updateElo = async (name,elo) => {
+    await setDoc(doc(db,"users",name),{
+        "name":name,
+        "elo":elo
+    })
+}
+
 export const hasName = async (name) => {
     const docRef = doc(db, "users", name);
     const docSnap = await getDoc(docRef);
