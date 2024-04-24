@@ -32,6 +32,13 @@ export const hasName = async (name) => {
     return true
 }
 
+export const getPlayer = async (name) => {
+    const docRef = doc(db, "users", name);
+    const docSnap = await getDoc(docRef);
+    if(docSnap.data() === undefined){return false}
+    return docSnap.data()
+}
+
 export const getLadder = async () => {
     
     const q = query(collection(db, "users"));
