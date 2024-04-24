@@ -4,7 +4,8 @@
 import HomeButton from "../elements/home"
 import { useState } from "react";
 
-import { hasName,updateElo } from "../firebase/addData";
+import { hasName,updateElo,getPlayer } from "../firebase/addData";
+import calculateChange from "../firebase/elo";
 
 export default function Hello(){
     
@@ -20,19 +21,24 @@ export default function Hello(){
         return true
     }   
 
-    const handleGame = async (name1,name2) => {
-
+    const handleGame = async (p1,p2,win) => {
+        
+        const res = calculateChange(p1.elo,p2.elo,win)
+        await updateElo(p1.name,Number((p1.elo+res[0]).toFixed(2)))
+        await updateElo(p2.name,Number((p2.elo+res[1]).toFixed(2)))
+        console.log("finished")
     }
 
     const handleButton = async (e) => {
         e.preventDefault();
         if((await checkName(player1,player2)) === false){return}
         if(win === undefined){console.log("win wrong");return}
-        if(win === "player1"){
-            handleGame(player1,player2)
-        }else{
-            handleGame(player2,player1)
-        }
+
+        const p1 = await getPlayer(player1)
+        const p2 = await getPlayer(player2)
+        if(p1 === false || p2 === false){console.log("db problem ?");return}
+
+        handleGame(p1,p2,win)
     }
 
     return (
@@ -52,9 +58,9 @@ export default function Hello(){
                     <fieldset style = {{maxWidth:"200px",display:"flex",gap:"5px",justifyContent:"center"}}>
                         <legend>Winner</legend>
                         <label>Player1</label>
-                        <input type="radio" name="group1" value="player1" onChange = {(e)=>{setWin(e.target.value)}}></input>
+                        <input type="radio" name="group1" value={1} onChange = {(e)=>{setWin(e.target.value)}}></input>
                         <label>Player2</label>
-                        <input type="radio" name="group1" value="player2" onChange = {(e)=>{setWin(e.target.value)}}></input>
+                        <input type="radio" name="group1" value={0} onChange = {(e)=>{setWin(e.target.value)}}></input>
                     </fieldset>
                 </div>
                 <button type="submit">Sumbit</button>
