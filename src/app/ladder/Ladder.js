@@ -2,7 +2,7 @@
 
 const SingleEntry = (props) => {
 
-    const elo = props.player.elo
+    const elo = (props.player.elo).toFixed(0)
     const name = props.player.name
     const place = props.place
     
