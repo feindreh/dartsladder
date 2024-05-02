@@ -1,7 +1,7 @@
 
 
 
-
+import "./style.css"
 
 export const metadata = {
   title: "Darts ist Toll",
