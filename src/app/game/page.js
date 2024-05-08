@@ -6,18 +6,25 @@ import { useState } from "react";
 
 import { hasName,updateElo,getPlayer } from "../firebase/addData";
 import calculateChange from "../firebase/elo";
+import PopUp from "../elements/popup";
 
 export default function Hello(){
     
     const [player1,setPlayer1] = useState("Flx")
     const [player2,setPlayer2] = useState("Cll")
     const [win,setWin] = useState()
+
+    const [popUpMessage,setPopUpMessage] = useState("Hello")
     
+    const popit = () => {
+        const p = document.getElementById("PopUp")
+        p.style.visibility = "visible"
+    }
 
     const checkName = async (name1,name2) => {
-        if(name1 === name2){console.log("same Name");return false}
-        if(await hasName(name1) === false){console.log("Player1 wrong Name");return false}
-        if(await hasName(name2) === false){console.log("Player2 wrong Name");return false}
+        if(name1 === name2){setPopUpMessage("same Name");return false}
+        if(await hasName(name1) === false){setPopUpMessage("Player1 wrong Name");return false}
+        if(await hasName(name2) === false){setPopUpMessage("Player2 wrong Name");return false}
         return true
     }   
 
@@ -26,23 +33,26 @@ export default function Hello(){
         const res = calculateChange(p1.elo,p2.elo,win)
         await updateElo(p1.name,Number((p1.elo+res[0]).toFixed(2)))
         await updateElo(p2.name,Number((p2.elo+res[1]).toFixed(2)))
-        console.log("finished")
+        setPopUpMessage("finished")
     }
 
     const handleButton = async (e) => {
         e.preventDefault();
+        setPopUpMessage("hmm .....")
+        popit()
         if((await checkName(player1,player2)) === false){return}
-        if(win === undefined){console.log("win wrong");return}
+        if(win === undefined){setPopUpMessage("win wrong");return}
 
         const p1 = await getPlayer(player1)
         const p2 = await getPlayer(player2)
-        if(p1 === false || p2 === false){console.log("db problem ?");return}
+        if(p1 === false || p2 === false){setPopUpMessage("db problem ?");return}
 
         handleGame(p1,p2,win)
     }
 
     return (
         <div>
+            <PopUp message = {popUpMessage}/>
             <HomeButton/>
             <div>game</div>
             <form onSubmit = {handleButton}>
