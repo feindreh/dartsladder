@@ -1,12 +1,20 @@
 export default function PopUp(props){
 
-    // take props.message
-    
+
+
+    const closePopUp = () => {
+        
+        const PopUp = document.getElementById('PopUp');
+        PopUp.style.visibility = "hidden"
+
+
+    }
+
     return (
-        <div id="PopUp" style = {{visibility:props.visible?"visible":"hidden"}}>
+        <div id="PopUp" style = {{visibility:"hidden"}}>
             <div > 
-                <div>{props.message}</div>
-                <button type="button" onClick={()=>{props.close()}}>Ok</button>
+                <div>{props.message?props.message:"Hi"}</div>
+                <button type="button" onClick={()=>{closePopUp()}}>Ok</button>
             </div>
         </div>
     )
