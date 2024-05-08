@@ -3,7 +3,7 @@
 import { useState } from "react"
 
 import HomeButton from "../elements/home"
-import PopUp from "../elements/popup"
+
 
 
 import addName from "../firebase/addData"
@@ -13,11 +13,6 @@ export default function Hello(){
 
     const [name,setName] = useState("")
     const [nameError,setNameError] = useState("Enter Name")
-    const [PopUpActive,setPopUpActive] = useState(false)
-
-    const closePopUp = () => {
-        setPopUpActive(false)
-    }
 
     const checkNameError = (string) => {
         if(string === "Name used"){setNameError(string);return}
@@ -27,9 +22,9 @@ export default function Hello(){
     }
 
     const handleSubmit = async () =>{
-        if(nameError !== "Valid Name"){setPopUpActive(true);return}
+        if(nameError !== "Valid Name"){return}
         const used = await hasName(name)
-        if(used){checkNameError("Name used");setPopUpActive(true);return}
+        if(used){checkNameError("Name used");return}
         addName(name)
     }
 
@@ -43,7 +38,6 @@ export default function Hello(){
 
     return (
         <div>
-            <PopUp message={nameError} visible = {PopUpActive} close = {closePopUp}/>
             <HomeButton/>
             <div>Player</div>
             <div>
