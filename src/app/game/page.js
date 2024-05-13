@@ -10,12 +10,20 @@ import PopUp from "../elements/popup";
 
 export default function Hello(){
     
-    const [player1,setPlayer1] = useState("Flx")
-    const [player2,setPlayer2] = useState("Cll")
+    const [players,setPlayers] = useState(["Hello","World"])
     const [win,setWin] = useState()
 
     const [popUpMessage,setPopUpMessage] = useState("Hello")
     
+
+    const updatePlayerName = (newName,index) => {
+        const newArr = players.map((oldName,i) => {
+            if(i === index){return newName}else{return oldName}
+        })
+        setPlayers(newArr)
+    }
+
+
     const popit = () => {
         const p = document.getElementById("PopUp")
         p.style.visibility = "visible"
@@ -40,11 +48,11 @@ export default function Hello(){
         e.preventDefault();
         setPopUpMessage("hmm .....")
         popit()
-        if((await checkName(player1,player2)) === false){return}
+        if((await checkName(players[0],players[1])) === false){return}
         if(win === undefined){setPopUpMessage("win wrong");return}
 
-        const p1 = await getPlayer(player1)
-        const p2 = await getPlayer(player2)
+        const p1 = await getPlayer(players[0])
+        const p2 = await getPlayer(players[1])
         if(p1 === false || p2 === false){setPopUpMessage("db problem ?");return}
 
         handleGame(p1,p2,win)
@@ -58,11 +66,11 @@ export default function Hello(){
             <form onSubmit = {handleButton}>
                 <div>
                     <label>Player 1</label>
-                    <input type="text" value={player1} onChange = {(e)=>{setPlayer1(e.target.value)}}></input>
+                    <input type="text" value={players[0]} onChange = {(e)=>{updatePlayerName(e.target.value,0)}}></input>
                 </div>
                 <div>
                     <label>Player 2</label>
-                    <input type="text" value= {player2} onChange = {(e)=>{setPlayer2(e.target.value)}}></input>
+                    <input type="text" value= {players[1]} onChange = {(e)=>{updatePlayerName(e.target.value,1)}}></input>
                 </div>
                 <div>
                     <fieldset style = {{maxWidth:"200px",display:"flex",gap:"5px",justifyContent:"center"}}>
