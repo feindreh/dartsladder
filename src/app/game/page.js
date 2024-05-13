@@ -29,10 +29,22 @@ export default function Hello(){
         p.style.visibility = "visible"
     }
 
-    const checkName = async (name1,name2) => {
-        if(name1 === name2){setPopUpMessage("same Name");return false}
-        if(await hasName(name1) === false){setPopUpMessage("Player1 wrong Name");return false}
-        if(await hasName(name2) === false){setPopUpMessage("Player2 wrong Name");return false}
+    const checkName = async () => {
+        const count = {}
+        for(let i = 0; i< players.length;i++){
+            if(await hasName(players[i]) === false){
+                // check if name is spelled right
+                setPopUpMessage(`Player ${i+1} wrong Name`)
+                return false
+            }
+            if(count[players[i]] === undefined){
+                // check if name is already in use
+                count[players[i]] = 1
+            }else{
+                setPopUpMessage("Same Name")
+                return false
+            }
+        }
         return true
     }   
 
