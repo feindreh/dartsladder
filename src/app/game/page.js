@@ -7,6 +7,7 @@ import { useState } from "react";
 import { hasName,updateElo,getPlayer } from "../firebase/addData";
 import calculateChange from "../firebase/elo";
 import PopUp from "../elements/popup";
+import Player from "./player";
 
 export default function Hello(){
     
@@ -76,14 +77,7 @@ export default function Hello(){
             <HomeButton/>
             <div>game</div>
             <form onSubmit = {handleButton}>
-                <div>
-                    <label>Player 1</label>
-                    <input type="text" value={players[0]} onChange = {(e)=>{updatePlayerName(e.target.value,0)}}></input>
-                </div>
-                <div>
-                    <label>Player 2</label>
-                    <input type="text" value= {players[1]} onChange = {(e)=>{updatePlayerName(e.target.value,1)}}></input>
-                </div>
+                {players.map((name,i) => <Player key={i} name = {name} index = {i} callback = {updatePlayerName}/>)}
                 <div>
                     <fieldset style = {{maxWidth:"200px",display:"flex",gap:"5px",justifyContent:"center"}}>
                         <legend>Winner</legend>
