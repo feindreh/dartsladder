@@ -61,7 +61,7 @@ export default function Hello(){
         e.preventDefault();
         setPopUpMessage("hmm .....")
         popit()
-        if((await checkName(players[0],players[1])) === false){return}
+        if((await checkName()) === false){return}
         if(win === undefined){setPopUpMessage("win wrong");return}
 
         const p1 = await getPlayer(players[0])
