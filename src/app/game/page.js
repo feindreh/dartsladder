@@ -8,6 +8,7 @@ import { hasName,updateElo,getPlayer } from "../firebase/addData";
 import calculateChange from "../firebase/elo";
 import PopUp from "../elements/popup";
 import Player from "./player";
+import Winner from "./winner";
 
 export default function Hello(){
     
@@ -64,11 +65,17 @@ export default function Hello(){
     }
 
     const handleButton = async (e) => {
-        e.preventDefault();
+
+        e.preventDefault()
+
         setPopUpMessage("hmm .....")
         popit()
+        
         if((await checkName()) === false){return}
         if(win === undefined){setPopUpMessage("win wrong");return}
+
+        console.log(players)
+        console.log(win)
         console.log("handle Button")
         // ToDo
         // const p1 = await getPlayer(players[0])
@@ -88,10 +95,7 @@ export default function Hello(){
                 <div>
                     <fieldset style = {{maxWidth:"200px",display:"flex",gap:"5px",justifyContent:"center"}}>
                         <legend>Winner</legend>
-                        <label>Player1</label>
-                        <input type="radio" name="group1" value={1} onChange = {(e)=>{setWin(e.target.value)}}></input>
-                        <label>Player2</label>
-                        <input type="radio" name="group1" value={0} onChange = {(e)=>{setWin(e.target.value)}}></input>
+                        {players.map((name,i) => <Winner key = {i} name = {name} index = {i} callback = {setWin}/>)}
                     </fieldset>
                 </div>
                 <button type="submit">Sumbit</button>
