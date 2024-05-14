@@ -16,6 +16,7 @@ export default function Hello(){
     const [win,setWin] = useState()
 
     const [popUpMessage,setPopUpMessage] = useState("Hello")
+    const [popUpValue,setPopUpValue] = useState([])
     
 
     const updatePlayerName = (newName,index) => {
@@ -125,15 +126,27 @@ export default function Hello(){
         // update changes
         console.log(results)
         for(let key in results){
-            console.log(key,results[key].newElo)
             await updateElo(key,results[key].newElo)
         }
         // display changes
+
+        let resultArr = []
+        for(let name in results){
+            const player = results[name]
+            let str = name
+            if(player.change >= 0){str += " + "}else{str += " - "}
+            str += ` ${Math.abs(player.change.toFixed(1))} `
+            str += "--->"
+            str += ` ${player.oldElo.toFixed(0)} => ${player.newElo.toFixed(0)} ` 
+            resultArr.push(str)
+        }
+        setPopUpMessage("Results:")
+        setPopUpValue(resultArr)
     }
 
     return (
         <div>
-            <PopUp message = {popUpMessage}/>
+            <PopUp message = {popUpMessage} value={popUpValue}/>
             <HomeButton/>
             <div>game</div>
             <form onSubmit = {handleButton}>
