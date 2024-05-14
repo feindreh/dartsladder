@@ -25,6 +25,7 @@ export default function Hello(){
     }
 
 
+
     const popit = () => {
         const p = document.getElementById("PopUp")
         p.style.visibility = "visible"
@@ -50,11 +51,12 @@ export default function Hello(){
     }   
 
     const handleGame = async (p1,p2,win) => {
-        
-        const res = calculateChange(p1.elo,p2.elo,win)
-        await updateElo(p1.name,Number((p1.elo+res[0]).toFixed(2)))
-        await updateElo(p2.name,Number((p2.elo+res[1]).toFixed(2)))
-        setPopUpMessage("finished")
+        console.log("Handle Game")
+        // ToDo
+        // const res = calculateChange(p1.elo,p2.elo,win)
+        // await updateElo(p1.name,Number((p1.elo+res[0]).toFixed(2)))
+        // await updateElo(p2.name,Number((p2.elo+res[1]).toFixed(2)))
+        // setPopUpMessage("finished")
     }
 
     const handleButton = async (e) => {
@@ -63,12 +65,13 @@ export default function Hello(){
         popit()
         if((await checkName()) === false){return}
         if(win === undefined){setPopUpMessage("win wrong");return}
+        console.log("handle Button")
+        // ToDo
+        // const p1 = await getPlayer(players[0])
+        // const p2 = await getPlayer(players[1])
+        // if(p1 === false || p2 === false){setPopUpMessage("db problem ?");return}
 
-        const p1 = await getPlayer(players[0])
-        const p2 = await getPlayer(players[1])
-        if(p1 === false || p2 === false){setPopUpMessage("db problem ?");return}
-
-        handleGame(p1,p2,win)
+        // handleGame(p1,p2,win)
     }
 
     return (
