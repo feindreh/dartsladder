@@ -89,6 +89,8 @@ export default function Hello(){
                 </div>
                 <button type="submit">Sumbit</button>
             </form>
+
+            <button type = "button" onClick = {()=>{setPlayers([...players,"NewOne"])}}> New Player </button>
             
         </div>  
     )
