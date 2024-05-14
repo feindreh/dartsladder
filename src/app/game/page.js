@@ -24,6 +24,10 @@ export default function Hello(){
         setPlayers(newArr)
     }
 
+    const deletePlayer = (index) => {
+        const newArray = players.filter((a,i) => i !== index)
+        setPlayers(newArray)
+    }
 
 
     const popit = () => {
@@ -80,7 +84,7 @@ export default function Hello(){
             <HomeButton/>
             <div>game</div>
             <form onSubmit = {handleButton}>
-                {players.map((name,i) => <Player key={i} name = {name} index = {i} callback = {updatePlayerName}/>)}
+                {players.map((name,i) => <Player key={i} name = {name} index = {i} callback = {updatePlayerName} delete = {deletePlayer}/>)}
                 <div>
                     <fieldset style = {{maxWidth:"200px",display:"flex",gap:"5px",justifyContent:"center"}}>
                         <legend>Winner</legend>
