@@ -118,14 +118,15 @@ export default function Hello(){
             const change = changes[p.name]
             const newElo = p.elo+changes[p.name]
 
-            results[p.name] = {"old":oldElo,"change":change,"new":newElo}
+            results[p.name] = {"oldElo":oldElo,"change":change,"newElo":newElo}
         }
 
         setPopUpMessage("Updating Results")
         // update changes
         console.log(results)
         for(let key in results){
-            await updateElo(key,results.newElo)
+            console.log(key,results[key].newElo)
+            await updateElo(key,results[key].newElo)
         }
         // display changes
     }
