@@ -55,25 +55,23 @@ export default function Hello(){
         return true
     }   
 
-    const handleGame = async (arr,index) => {
+    const handleGame = async (playerArray,index) => {
 
-        if(arr.length < 2){console.log("hmm");return {}}
-        if(index >= arr.length - 1){console.log("uhmmm");return {}}
+        if(playerArray.length < 2){console.log("hmm");return {}}
+        if(index >= playerArray.length){console.log("uhmmm");return {}}
 
-        const factor = (arr.length * 0.5)/(arr.length - 1)
+        const factor = (playerArray.length * 0.5)/(playerArray.length - 1)
         // balance games with multiple players
         // denominator splits the  numerator("the value of the game") between the player
         // factor should be 1 at arr.length === 2
 
         setPopUpMessage("calculating ....")
-        const changes = {} // {name:elo}
-        const playerArray = []
 
-        for(let i = 0;i<arr.length;i++){
-            const n = await getPlayer(arr[i])
-            changes[arr[i]] = 0
-            playerArray.push(n)
+        const changes = {} // {name:elo}
+        for(let i = 0;i<playerArray.length;i++){
+            changes[playerArray[i].name] = 0
         }
+        
 
         for(let i = 0;i<playerArray.length;i++){
 
@@ -102,9 +100,34 @@ export default function Hello(){
         if((await checkName()) === false){return}
         if(win === undefined){setPopUpMessage("win wrong");return}
 
-        const changes = await handleGame(players,win)
+        const DataArray = []
+        const arr = [...players]
+        for(let i = 0;i<arr.length;i++){
+            const n = await getPlayer(arr[i])
+            DataArray.push(n)
+        }
 
-        console.log(changes)
+        const changes = await handleGame(DataArray,win)
+
+        const results = {}
+
+        for(let i = 0;i<DataArray.length;i++){
+            const p = DataArray[i]
+
+            const oldElo = p.elo
+            const change = changes[p.name]
+            const newElo = p.elo+changes[p.name]
+
+            results[p.name] = {"old":oldElo,"change":change,"new":newElo}
+        }
+
+        setPopUpMessage("Updating Results")
+        // update changes
+        console.log(results)
+        for(let key in results){
+            await updateElo(key,results.newElo)
+        }
+        // display changes
     }
 
     return (
