@@ -55,13 +55,41 @@ export default function Hello(){
         return true
     }   
 
-    const handleGame = async (p1,p2,win) => {
-        console.log("Handle Game")
-        // ToDo
-        // const res = calculateChange(p1.elo,p2.elo,win)
-        // await updateElo(p1.name,Number((p1.elo+res[0]).toFixed(2)))
-        // await updateElo(p2.name,Number((p2.elo+res[1]).toFixed(2)))
-        // setPopUpMessage("finished")
+    const handleGame = async (arr,index) => {
+
+        if(arr.length < 2){console.log("hmm");return {}}
+        if(index >= arr.length - 1){console.log("uhmmm");return {}}
+
+        const factor = (arr.length * 0.5)/(arr.length - 1)
+        // balance games with multiple players
+        // denominator splits the  numerator("the value of the game") between the player
+        // factor should be 1 at arr.length === 2
+
+        setPopUpMessage("calculating ....")
+        const changes = {} // {name:elo}
+        const playerArray = []
+
+        for(let i = 0;i<arr.length;i++){
+            const n = await getPlayer(arr[i])
+            changes[arr[i]] = 0
+            playerArray.push(n)
+        }
+
+        for(let i = 0;i<playerArray.length;i++){
+
+            const p1 = playerArray[index]
+            const p2 = playerArray[i]
+            const res = calculateChange(p1.elo,p2.elo,1)
+            changes[p1.name] += res[0] * factor
+            changes[p2.name] += res[1] * factor
+            
+        }
+
+        setPopUpMessage("calculated !!!")
+
+        return changes
+
+        
     }
 
     const handleButton = async (e) => {
@@ -74,15 +102,9 @@ export default function Hello(){
         if((await checkName()) === false){return}
         if(win === undefined){setPopUpMessage("win wrong");return}
 
-        console.log(players)
-        console.log(win)
-        console.log("handle Button")
-        // ToDo
-        // const p1 = await getPlayer(players[0])
-        // const p2 = await getPlayer(players[1])
-        // if(p1 === false || p2 === false){setPopUpMessage("db problem ?");return}
+        const changes = await handleGame(players,win)
 
-        // handleGame(p1,p2,win)
+        console.log(changes)
     }
 
     return (
