@@ -2,6 +2,7 @@
 
 
 import "./css/global.css"
+import "./css/reset.css"
 
 export const metadata = {
   title: "Darts ist Toll",
