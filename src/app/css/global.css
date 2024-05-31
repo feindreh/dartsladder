@@ -14,8 +14,19 @@
     
 }
 .container2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:20px;
     background-color: #0000003d;
     height:100%;
     width: 100%;
 
+}
+.MainButton{
+    padding: 50px;
+    background-color: white;
+    width: 500px;
+    border-radius: 30px;
 }
