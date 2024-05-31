@@ -6,3 +6,16 @@
     text-align: center;
     background: white;
 }
+
+.container{
+    background-image: url("https://cdn.pixabay.com/photo/2019/02/15/02/49/graphic-3997741_1280.png");
+    width: 100vw;
+    height: 100dvh ;
+    
+}
+.container2{
+    background-color: #0000003d;
+    height:100%;
+    width: 100%;
+
+}
