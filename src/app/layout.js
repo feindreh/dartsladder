@@ -3,6 +3,7 @@
 
 import "./css/global.css"
 import "./css/reset.css"
+import "./css/variables.css"
 
 export const metadata = {
   title: "Darts ist Toll",
