@@ -6,21 +6,25 @@ export default function Home() {
   return (
     <main className="container">
       <div className ="container2">
-        <button className="MainButton">
-          <Link href ="/ladder">
-              Leiter anschauen
-          </Link>
-        </button>
-        <button className="MainButton">
-          <Link  href="/game">
-              Spiel eintragen
-          </Link>
-        </button>
-        <button className="MainButton">
-          <Link  href="/player">
-              Neuer Spieler
-          </Link>
-        </button >
+
+        <Link href ="/ladder">
+          <button className="MainButton">
+            Leiter anschauen
+          </button>
+        </Link>
+
+        <Link  href="/game">
+          <button className="MainButton">
+            Spiel eintragen
+          </button>
+        </Link>
+
+        <Link  href="/player">
+          <button className="MainButton">
+            Neuer Spieler
+          </button >
+        </Link>
+
       </div>
     </main>
   );
