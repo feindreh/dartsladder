@@ -4,22 +4,24 @@ import Link from "next/link";
 export default function Home() {
 
   return (
-    <main>
-      <button>
-        <Link href ="/ladder">
-            Leiter anschauen
-        </Link>
-      </button>
-      <button >
-        <Link  href="/game">
-            Spiel eintragen
-        </Link>
-      </button>
-      <button >
-        <Link  href="/player">
-            Neuer Spieler
-        </Link>
-      </button>
+    <main className="container">
+      <div className ="container2">
+        <button className="MainButton">
+          <Link href ="/ladder">
+              Leiter anschauen
+          </Link>
+        </button>
+        <button className="MainButton">
+          <Link  href="/game">
+              Spiel eintragen
+          </Link>
+        </button>
+        <button className="MainButton">
+          <Link  href="/player">
+              Neuer Spieler
+          </Link>
+        </button >
+      </div>
     </main>
   );
 }
