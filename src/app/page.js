@@ -6,17 +6,17 @@ export default function Home() {
   return (
         <div className = "container2">
           <Link href ="/ladder">
-            <button className="MainButton">
+            <button className="MainButton box">
               Leiter anschauen
             </button>
           </Link>
           <Link  href="/game">
-            <button className="MainButton">
+            <button className="MainButton box">
               Spiel eintragen
             </button>
           </Link>
           <Link  href="/player">
-            <button className="MainButton">
+            <button className="MainButton box">
               Neuer Spieler
             </button >
           </Link>

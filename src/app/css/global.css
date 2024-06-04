@@ -19,18 +19,24 @@
     justify-content: center;
     align-items: center;
     gap: clamp(20px, 3vh, 40px);
-    background-color: #0000003d;
+    
     height: 100%;
     width: 100%;
 
 }
-.MainButton{
+.box{
+    background-color: #0000003d;
     background-color: #000000;
+    color: white;
+    border: 2px outset #c5c2c2;
+}
+
+.MainButton{
+    
     width: clamp(150px, 50vw, 350px);
     height: 2rem;
     font-size: 1rem;
     font-weight: bolder;
     /* border-radius: 7px; */
-    color: white;
-    border: 2px outset #c5c2c2;
+    
 }
