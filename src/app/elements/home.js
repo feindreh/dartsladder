@@ -2,10 +2,13 @@ import Link from "next/link"
 
 export default function HomeButton(){
     return (
-        <button >
-            <Link  href="/">
+       
+        <Link  href="/">
+            <button className="box MainButton">
                 Nach Hause
-            </Link>
-        </button>
+            </button>
+        </Link>
+
+       
     )
 }
