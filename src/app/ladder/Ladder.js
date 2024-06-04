@@ -7,7 +7,7 @@ const SingleEntry = (props) => {
     const place = props.place
     
     return(
-        <div style={{display:"flex",gap:"10px"}}>
+        <div style={{display:"flex",gap:"10px",width: "200px",justifyContent: "space-between"}}>
             <div>{place}.</div>
             <div>{name}</div>
             <div>{elo}</div>
