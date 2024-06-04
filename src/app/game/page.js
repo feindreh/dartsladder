@@ -145,7 +145,7 @@ export default function Hello(){
     }
 
     return (
-        <div>
+        <div className = "container2">
             <PopUp message = {popUpMessage} value={popUpValue}/>
             <HomeButton/>
             <div>game</div>

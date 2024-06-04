@@ -23,7 +23,7 @@ export default function Hello(){
 
 
     return (
-        <div>
+        <div className = "container2">
             <HomeButton/>
             <Ladder players = {players}/>
         </div>  
