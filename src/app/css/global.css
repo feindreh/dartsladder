@@ -29,6 +29,7 @@
     background-color: #000000;
     color: white;
     border: 2px outset #c5c2c2;
+    
 }
 
 .MainButton{
@@ -43,4 +44,13 @@
 
 div{
     color:white
+}
+#ladder{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    font-size: 1.5rem;
+    background: #000000cc;
 }
