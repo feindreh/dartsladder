@@ -144,20 +144,29 @@ export default function Hello(){
 
     return (
         <div className = "container2">
+
             <PopUp message = {popUpMessage} value={popUpValue}/>
+
             <HomeButton/>
+
             <div className = "box ladder"  >
                 {players.map((name,i) => <Player key={i} name = {name} index = {i} callback = {updatePlayerName} delete = {deletePlayer}/>)}
-                <div>
-                    <fieldset style = {{maxWidth:"200px",display:"flex",gap:"5px",justifyContent:"center"}}>
-                        <legend>Winner</legend>
-                        {players.map((name,i) => <Winner key = {i} name = {name} index = {i} callback = {setWin}/>)}
-                    </fieldset>
-                </div>
             </div>
+
+            <button className="MainButton box" type = "button" onClick = {()=>{setPlayers([...players,"NewOne"])}}>
+                Mehr Spieler 
+            </button>
+
+            <div className = "box ladder">
+                <fieldset className = "winners">
+                    <legend>Winner</legend>
+                    {players.map((name,i) => <Winner key = {i} name = {name} index = {i} callback = {setWin}/>)}
+                </fieldset>
+            </div>
+
             <button className = "MainButton box" type="button" onClick = {()=>{handleButton()}} >Submit</button> 
 
-            <button className="MainButton box" type = "button" onClick = {()=>{setPlayers([...players,"NewOne"])}}> Mehr Spieler </button>
+            
             
         </div>  
     )
