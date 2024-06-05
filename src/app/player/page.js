@@ -39,14 +39,11 @@ export default function Hello(){
     return (
         <div className = "container2">
             <HomeButton/>
-            <div>Player</div>
-            <div>
+            <div className = "box" id="ladder">
                 <div>{nameError}</div>
                 <input type="text" onChange = {(e)=>{handleChange(e)}}></input>
                 <button type="button" onClick = {()=>{handleSubmit()}}>Submit</button>
             </div>
-
-
         </div>  
     )
 }
