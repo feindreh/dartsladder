@@ -148,7 +148,6 @@ export default function Hello(){
         <div className = "container2">
             <PopUp message = {popUpMessage} value={popUpValue}/>
             <HomeButton/>
-            <div>game</div>
             <form onSubmit = {handleButton}>
                 {players.map((name,i) => <Player key={i} name = {name} index = {i} callback = {updatePlayerName} delete = {deletePlayer}/>)}
                 <div>
