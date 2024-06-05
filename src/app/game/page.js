@@ -164,7 +164,7 @@ export default function Hello(){
                 </fieldset>
             </div>
 
-            <button className = "MainButton box" type="button" onClick = {()=>{handleButton()}} >Submit</button> 
+            <button className = "MainButton box" type="button" onClick = {()=>{handleButton()}} >Eintragen</button> 
 
             
             
