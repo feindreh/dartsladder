@@ -164,7 +164,9 @@ export default function Hello(){
                 </fieldset>
             </div>
 
-            <button className = "MainButton box" type="button" onClick = {()=>{handleButton()}} >Eintragen</button> 
+            <button className = "MainButton box" style={{"margin-bottom":"20px"}} type="button" onClick = {()=>{handleButton()}} >
+                Eintragen
+            </button> 
 
             
             
