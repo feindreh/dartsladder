@@ -10,8 +10,8 @@ export default function PopUp(props){
     }
 
     return (
-        <div id="PopUp" style = {{visibility:"hidden"}}>
-            <div > 
+        <div id="PopUp"  style = {{visibility:"hidden"}}>
+            <div className = "ladder"> 
                 <div>{props.message?props.message:"Hi"}</div>
 
                 {props.value.map((a,i) => (<div key={i}>{a}</div>))}

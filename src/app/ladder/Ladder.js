@@ -19,7 +19,7 @@ const SingleEntry = (props) => {
 
 export default function Ladder(props){
     return (
-        <div className = "box" id="ladder">
+        <div className = "box ladder" >
                 {props.players.map((player,i) => <SingleEntry key={player.name} player = {player} place = {i+1}/>)}
         </div>
     )

@@ -39,7 +39,7 @@ export default function Hello(){
     return (
         <div className = "container2">
             <HomeButton/>
-            <div className = "box" id="ladder">
+            <div className = "box ladder" >
                 <div>{nameError}</div>
                 <input type="text" onChange = {(e)=>{handleChange(e)}}></input>
                 <button type="button" onClick = {()=>{handleSubmit()}}>Submit</button>
