@@ -13,7 +13,7 @@ const db = getFirestore(app);
 const main = "users"
 const second = "dusers"
 
-const inUse = main
+const inUse = second
 
 const addName = async (name) => {
     // Add a new document in collection "cities"
