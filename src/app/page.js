@@ -20,6 +20,11 @@ export default function Home() {
               Neuer Spieler
             </button >
           </Link>
+          <Link  href="/profile">
+            <button className="MainButton box">
+              Profile
+            </button >
+          </Link>
         </div>
   );
 }
