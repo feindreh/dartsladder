@@ -5,6 +5,7 @@
 
 import { getFirestore } from "firebase/firestore";
 import {collection, query, getDocs, doc, setDoc ,getDoc} from "firebase/firestore"; 
+import uniqid from 'uniqid';
 
 import app from "./hmm";
 
@@ -13,7 +14,11 @@ const db = getFirestore(app);
 const main = "users"
 const second = "dusers"
 
+const mainMatches = "matches"
+const secondMatches = "secondMatches"
+
 const inUse = second
+const inUseDatabase = secondMatches
 
 const addName = async (name) => {
     // Add a new document in collection "cities"
@@ -21,6 +26,11 @@ const addName = async (name) => {
         "name": name,
         "elo": 1200
     });
+}
+
+export const addMatch = async (game) => {
+     const id = uniqid()
+    await setDoc(doc(db, inUseDatabase, id), game );
 }
 
 export const updateElo = async (name,elo) => {

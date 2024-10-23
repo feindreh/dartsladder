@@ -4,7 +4,7 @@
 import HomeButton from "../elements/home"
 import { useState } from "react";
 
-import { hasName,updateElo,getPlayer } from "../firebase/addData";
+import { hasName,updateElo,getPlayer,addMatch} from "../firebase/addData";
 import calculateChange from "../firebase/elo";
 import PopUp from "../elements/popup";
 import Player from "./player";
@@ -108,6 +108,7 @@ export default function Hello(){
 
         const changes = await handleGame(DataArray,win)
 
+
         const results = {}
 
         for(let i = 0;i<DataArray.length;i++){
@@ -122,10 +123,11 @@ export default function Hello(){
 
         setPopUpMessage("Updating Results")
         // update changes
-        console.log(results)
         for(let key in results){
             await updateElo(key,results[key].newElo)
         }
+        // add match to db
+        addMatch(results)
         // display changes
 
         let resultArr = []
