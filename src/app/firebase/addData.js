@@ -67,8 +67,14 @@ export const getLadder = async () => {
 // Matches
 
 export const addMatch = async (game) => {
-     const id = uniqid()
-    await setDoc(doc(db, inUseDatabase, id), game );
+    const id = uniqid()
+    const time = Date.now()
+
+    await setDoc(doc(db, inUseDatabase, id), {
+        game:game,
+        time:time
+    } );
+ 
 }
 
 export const getMatches = async () => {
