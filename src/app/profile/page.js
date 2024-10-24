@@ -1,34 +1,31 @@
 "use client"
 
 import HomeButton from "../elements/home"
+import Matches from "./matches";
+
 
 import { useState } from "react";
 
-import { hasName } from "../firebase/addData";
+import { getMatches, hasName } from "../firebase/addData";
 
 export default function Hello(){
 
     const [player,setPlayer] = useState("Hello")
+    const [rightName,setRightName] = useState(false)
+    const [history,setHistory] = useState([])
 
     const handleChange = (e) => {
         setPlayer(e)
     }
 
-    const displayMessage = () => {
-       throw Error("Implement Display")
-    }
-
-    const displayMatches = () => {
-        throw Error("Implement Matches")
-    }
-
     const handleButton = async (e) => {
         const nameIsRight = await hasName(player)
         if(nameIsRight === false){
-            displayMessage(`${player} not in Dataset`)
+            setRightName(false)
         }else{
-            displayMessage("Name is Okay")
-            displayMatches()
+            setRightName(true)
+            const arr = await getMatches()
+            setHistory(arr.filter((a) => a.game[player] !== undefined).sort((a,b) => b.time-a.time))
         }
     }
 
@@ -44,11 +41,10 @@ export default function Hello(){
                 <input type="text" value = {player} onChange = {(e)=>{handleChange(e.target.value)}}>
                 </input>
            </div>
-            
-
             <button className= "box MainButton" style={{"margin-top":"20px"}} onClick = {()=>{handleButton()}} >
                 looki looki
             </button> 
+            <Matches rightName = {rightName} history = {history}/>
         </div>  
     )
 }
