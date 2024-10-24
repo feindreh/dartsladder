@@ -34,15 +34,12 @@ export default function Hello(){
     return (
         <div className = "container2">
             <HomeButton/>
-            <div className = "box ladder" >
-                <div>Profile</div>
-            </div>
            <div className = "box ladder">
                 <input type="text" value = {player} onChange = {(e)=>{handleChange(e.target.value)}}>
                 </input>
            </div>
             <button className= "box MainButton" style={{"margin-top":"20px"}} onClick = {()=>{handleButton()}} >
-                looki looki
+                Suchen
             </button> 
             <Matches rightName = {rightName} history = {history}/>
         </div>  
