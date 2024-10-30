@@ -109,29 +109,54 @@ export default function Hello(){
             return res
         }
         const DataArray = await makeDataArray()
-        console.log("DATAARRAY",DataArray)
         const changes = await handleGame(DataArray,win)
-        console.log("changes",changes)
-        return
-        const results = {}
+        
 
-        for(let i = 0;i<DataArray.length;i++){
-            const p = DataArray[i]
+        const getResults = () => {
+            const res = {}
+            for(let i = 0;i<DataArray.length;i++){
+                const p = DataArray[i]
 
-            const oldElo = p.elo
-            const change = changes[p.name]
-            const newElo = p.elo+changes[p.name]
+                const mmrOld = p.mmr
+                const mmrChange = changes[p.name]
+                const mmrNew =  p.mmr + mmrChange
 
-            results[p.name] = {"oldElo":oldElo,"change":change,"newElo":newElo}
+                const eloOld = p.elo
+                const eloChange = (() => {
+                    const difference = p.mmr - p.elo
+                    const changeFromMMR = Math.sqrt(difference) * ((difference >= 0)?1:-1 )
+                    if(changes[p.name] >= 0){
+                        //dont loose elo when winning
+                        return Math.max(changes[p.name] + changeFromMMR,0)
+                    }else{
+                        //dont win elo when loosing
+                        return Math.min(changes[p.name] + changeFromMMR,0)
+                    }
+                })()
+                const eloNew = p.elo+ eloChange
+
+                res[p.name] = {mmrOld,mmrChange,mmrNew,eloOld,eloChange,eloNew}
+            }
+            return res
         }
+
+        const results = getResults()
+        console.log("Results",results)
+        return
+        
 
         setPopUpMessage("Updating Results")
         // update changes
-        console.log("Results",results)
+        
+
+
         for(let key in results){
             await updateElo(key,results[key].newElo)
         }
         // add match to db
+
+        
+
         addMatch(results)
         // display changes
 
