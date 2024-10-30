@@ -45,11 +45,16 @@ export const getPlayer = async (name) => {
     return docSnap.data()
 }
 
-// Elo
+// Elo/MMR
 
 export const updateElo = async (name,elo) => {
     await updateDoc(doc(db,inUse,name),{
         "elo":elo
+    })
+}
+export const updateMMR = async (name,mmr) => {
+    await updateDoc(doc(db,inUse,name),{
+        "mmr":mmr
     })
 }
 
