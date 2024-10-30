@@ -124,7 +124,7 @@ export default function Hello(){
                 const eloOld = p.elo
                 const eloChange = (() => {
                     const difference = mmrNew - p.elo
-                    const changeFromMMR = Math.sqrt(difference) * ((difference >= 0)?1:-1 )
+                    const changeFromMMR = difference/5
                     if(changes[p.name] >= 0){
                         //dont loose elo when winning
                         return Math.max(changes[p.name] + changeFromMMR,0)
