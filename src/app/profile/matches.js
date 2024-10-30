@@ -18,7 +18,7 @@ const SingleMatch = (props) => {
     const {time,game} = props
     const arr = []
     for(let name in game){
-        arr.push(makeString(name,game[name].newElo.toFixed(0),game[name].change.toFixed(0),game[name].oldElo.toFixed(0)))
+        arr.push(makeString(name,game[name].eloNew.toFixed(0),game[name].eloChange.toFixed(0),game[name].eloOld.toFixed(0)))
     }
     return(
         <div >
