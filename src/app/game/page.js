@@ -99,16 +99,20 @@ export default function Hello(){
         if((await checkName()) === false){return}
         if(win === undefined){setPopUpMessage("win wrong");return}
 
-        const DataArray = []
-        const arr = [...players]
-        for(let i = 0;i<arr.length;i++){
-            const n = await getPlayer(arr[i])
-            DataArray.push(n)
+        const makeDataArray = async () => {
+            const res = []
+            const arr = [...players]
+            for(let i = 0;i<arr.length;i++){
+                const n = await getPlayer(arr[i])
+                res.push(n)
+            }
+            return res
         }
-
+        const DataArray = await makeDataArray()
+        console.log("DATAARRAY",DataArray)
         const changes = await handleGame(DataArray,win)
-
-
+        console.log("changes",changes)
+        return
         const results = {}
 
         for(let i = 0;i<DataArray.length;i++){
@@ -123,6 +127,7 @@ export default function Hello(){
 
         setPopUpMessage("Updating Results")
         // update changes
+        console.log("Results",results)
         for(let key in results){
             await updateElo(key,results[key].newElo)
         }
@@ -166,7 +171,7 @@ export default function Hello(){
                 </fieldset>
             </div>
 
-            <button className = "MainButton box" style={{"margin-bottom":"20px"}} type="button" onClick = {()=>{handleButton()}} >
+            <button className = "MainButton box" style={{"marginBottom":"20px"}} type="button" onClick = {()=>{handleButton()}} >
                 Eintragen
             </button> 
 
