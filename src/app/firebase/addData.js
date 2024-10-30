@@ -4,7 +4,7 @@
 
 
 import { getFirestore } from "firebase/firestore";
-import {collection, query, getDocs, doc, setDoc ,getDoc} from "firebase/firestore"; 
+import {collection, query, getDocs, doc, setDoc ,getDoc, updateDoc} from "firebase/firestore"; 
 import uniqid from 'uniqid';
 
 import app from "./hmm";
@@ -26,7 +26,8 @@ const addName = async (name) => {
     // Add a new document in collection "cities"
     await setDoc(doc(db, inUse, name), {
         "name": name,
-        "elo": 1200
+        "elo": 0,
+        "mmr":1200
     });
 }
 
@@ -47,8 +48,7 @@ export const getPlayer = async (name) => {
 // Elo
 
 export const updateElo = async (name,elo) => {
-    await setDoc(doc(db,inUse,name),{
-        "name":name,
+    await updateDoc(doc(db,inUse,name),{
         "elo":elo
     })
 }
