@@ -17,8 +17,8 @@ const second = "dusers"
 const mainMatches = "matches"
 const secondMatches = "secondMatches"
 
-const inUse = second
-const inUseDatabase = secondMatches
+const inUse = main
+const inUseDatabase = mainMatches
 
 // Player 
 
