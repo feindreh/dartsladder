@@ -4,7 +4,7 @@
 import HomeButton from "../elements/home"
 import { useState } from "react";
 
-import { hasName,updateElo,getPlayer,addMatch} from "../firebase/addData";
+import { hasName,updateElo,updateMMR,getPlayer,addMatch} from "../firebase/addData";
 import calculateChange from "../firebase/elo";
 import PopUp from "../elements/popup";
 import Player from "./player";
@@ -123,7 +123,7 @@ export default function Hello(){
 
                 const eloOld = p.elo
                 const eloChange = (() => {
-                    const difference = p.mmr - p.elo
+                    const difference = mmrNew - p.elo
                     const changeFromMMR = Math.sqrt(difference) * ((difference >= 0)?1:-1 )
                     if(changes[p.name] >= 0){
                         //dont loose elo when winning
@@ -142,16 +142,15 @@ export default function Hello(){
 
         const results = getResults()
         console.log("Results",results)
-        return
         
 
         setPopUpMessage("Updating Results")
         // update changes
         
 
-
         for(let key in results){
-            await updateElo(key,results[key].newElo)
+            await updateElo(key,results[key].eloNew)
+            await updateMMR(key,results[key].mmrNew)
         }
         // add match to db
 
@@ -163,11 +162,13 @@ export default function Hello(){
         let resultArr = []
         for(let name in results){
             const player = results[name]
+            console.log(player)
             let str = name
-            if(player.change >= 0){str += " + "}else{str += " - "}
-            str += ` ${Math.abs(player.change.toFixed(1))} `
+            if(player.eloChange >= 0){str += " + "}else{str += " - "}
+            str += ` ${Math.abs(player.eloChange.toFixed(1))} `
             str += "--->"
-            str += ` ${player.oldElo.toFixed(0)} => ${player.newElo.toFixed(0)} ` 
+            str += ` ${player.eloOld.toFixed(0)} => ${player.eloNew.toFixed(0)} ` 
+            console.log(str)
             resultArr.push(str)
         }
         setPopUpMessage("Results:")
