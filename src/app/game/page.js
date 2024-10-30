@@ -68,7 +68,7 @@ export default function Hello(){
 
         setPopUpMessage("calculating ....")
 
-        const changes = {} // {name:elo}
+        const changes = {} // {name:mmr}
         for(let i = 0;i<playerArray.length;i++){
             changes[playerArray[i].name] = 0
         }
@@ -78,7 +78,7 @@ export default function Hello(){
 
             const p1 = playerArray[index]
             const p2 = playerArray[i]
-            const res = calculateChange(p1.elo,p2.elo,1)
+            const res = calculateChange(p1.mmr,p2.mmr,1)
             changes[p1.name] += res[0] * factor
             changes[p2.name] += res[1] * factor
             
