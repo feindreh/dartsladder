@@ -123,7 +123,11 @@ export default function Hello(){
 
                 const eloOld = p.elo
                 const eloChange = (() => {
+
                     const difference = mmrNew - p.elo
+                    // Math.sqrt(-1) => NaN !!!!!!
+                    // difference CAN be negative
+
                     const changeFromMMR = difference/5
                     if(changes[p.name] >= 0){
                         //dont loose elo when winning
